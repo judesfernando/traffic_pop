@@ -5,18 +5,20 @@ This is a Drupal ( 6.x ) module which will show a modal(popup) withh Facebook li
 
 Features
 ================
-x Enable/Disable the popup
-x Able to set the popup duration ( How long the popup will remain in the screen before it closes automatically )
-x Able to set how frequent the visitors can see the popup
-x Show/Hide popup close button
-x Able to set a custom title for the popup
-x Able to set the URL to like on Facebook
+- Enable/Disable the popup
+- Able to set the popup duration ( How long the popup will remain in the screen before it closes automatically )
+- Able to set how frequent the visitors can see the popup
+- Show/Hide popup close button
+- Able to set a custom title for the popup
+- Able to set the URL to like on Facebook
 
 How to install
 ================
-- Download the module and copy it to your Drupal's module folder
-- Enable the module from module administration page
-- Go to "Traffic Pop Settings" from administrer page, Enable "Traffic Pop", Set the URL and hit Save button
+1. Download the module and copy it to your Drupal's module folder
+2. Enable the module from module administration page
+3. Go to "Traffic Pop Settings" from administrer page, Enable "Traffic Pop", Set the URL and hit Save button
 
 License
 ================
+GNU General Public License
+http://www.gnu.org/licenses/gpl-3.0.html
