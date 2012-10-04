@@ -26,7 +26,7 @@ $(document).ready(function(){
 	var st_time = traffic_pop.max_duration;
 	var timer = setInterval(function(){setTime(st_time--)},1000);
 	
-	$footer_msg = $('<div>This will close in '+st_time+' seconds | <a>Powered by Traffic Pop for Drupal</a></div>').addClass('traffic_pop_dialog_footer'); 
+	$footer_msg = $('<div>This will close in '+st_time+' seconds | <a target="_blank" href="http://goo.gl/cbjhP" >Powered by Traffic Pop for Drupal</a></div>').addClass('traffic_pop_dialog_footer'); 
 	
 	$dialog.append( $footer_msg );
 	
@@ -43,8 +43,7 @@ $(document).ready(function(){
 			});
 		}
 		
-		$footer_msg.html('<div>This will close in '+st_time+' seconds | <a>Powered by Traffic Pop for Drupal</a></div>');
+		$footer_msg.html('<div>This will close in '+st_time+' seconds | <a target="_blank" href="http://goo.gl/cbjhP" >Powered by Traffic Pop for Drupal</a></div>');
 	}
 
-})
-	
+})	
