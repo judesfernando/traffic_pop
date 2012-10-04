@@ -1,7 +1,7 @@
 Traffic Pop for Drupal 6.x
 ================
 
-This is a Drupal ( 6.x ) module which will show a modal(popup) withh Facebook like button to all new visitors. This module doesn't have any dependencies.
+This is a Drupal ( 6.x ) module which will show a modal(popup) with Facebook like button to all new visitors. This module doesn't have any dependencies.
 
 Features
 ================
