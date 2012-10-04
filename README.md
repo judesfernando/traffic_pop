@@ -1,4 +1,13 @@
-traffic_pop.repo
+Traffic Pop for Drupal 6.x
 ================
 
-Facebook Traffic Pop for Drupal 
+This is a Drupal ( Currentyl  )
+
+Features
+================
+
+How to install
+================
+
+License
+================
