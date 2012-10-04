@@ -1,0 +1,121 @@
+<?php
+
+function traffic_pop_init(){
+	if( variable_get('traffic_pop_enable','') && !isset($_COOKIE['tp_wait']) ){
+		
+		drupal_add_js('var traffic_pop = {
+			max_duration:'.variable_get('traffic_pop_max_duration','').',
+			show_close:'.variable_get('traffic_pop_show_close','').',
+			fb_url:"'.variable_get('traffic_pop_fb_page_url','').'",	
+			title:"'.variable_get('traffic_pop_title','').'"					
+		};','inline');
+		
+		drupal_add_js(drupal_get_path('module', 'traffic_pop') . '/traffic_pop.js');
+		drupal_add_css(drupal_get_path('module', 'traffic_pop') . '/traffic_pop.css');
+		
+		$wait_time = variable_get('traffic_pop_wait_time',0);
+		
+		if($wait_time==0){
+			setcookie('tp_wait',true,time()+3600*24*30);
+		}
+		else{
+			setcookie('tp_wait',true,time()+60*$wait_time);
+		}
+		
+	}
+}
+
+return theme('box','<ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>');
+
+function traffic_pop_admin_settings() {
+  $form = array();
+  
+  $form['traffic_pop_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Traffic Pop'),
+    '#default_value' => variable_get('traffic_pop_enable', 0),
+    '#required' => TRUE,
+  );
+
+  $form['traffic_pop_max_duration'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Pop Up Duration in Seconds'),
+    '#default_value' => variable_get('traffic_pop_max_duration', 10),
+    '#size' => 2,
+    '#maxlength' => 2,
+    '#description' => t("Time that the popup will display"),
+    '#required' => TRUE,
+  );
+  
+  $form['traffic_pop_wait_time'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Wait Time'),
+    '#default_value' => variable_get('traffic_pop_wait_time', 0),
+    '#size' => 2,
+    '#maxlength' => 2,
+    '#description' => t("The Number of minutes Traffic Pop wait before showing popup again, 0 to disable showing again"),
+    '#required' => TRUE,
+  );
+  
+  $form['traffic_pop_show_close'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show Close Button'),
+    '#default_value' => variable_get('traffic_pop_show_close', 1),
+    '#required' => TRUE,
+  );
+  
+  $form['traffic_pop_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Pop Up Title'),
+    '#default_value' => variable_get('traffic_pop_title', 'Traffic Pop'),
+    '#size' => 60,
+    '#description' => t("Title of the pop up"),
+    '#required' => TRUE,
+  );
+  
+  $form['traffic_pop_fb_page_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('URL to like'),
+    '#default_value' => variable_get('traffic_pop_fb_page_url',''),
+    '#size' => 60,
+    '#description' => t("URL of the facebook page that you want to display like button Ex:https://www.facebook.com/facebook"),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+function traffic_pop_admin_settings_validate($form, &$form_state) {
+  $maxdupr = $form_state['values']['traffic_pop_max_duration'];
+  $waittime = $form_state['values']['traffic_pop_wait_time'];
+  if (!is_numeric($maxdupr)) {
+    form_set_error('traffic_pop_max_duration', t('You must enter an integer for the popup duration.'));
+  }
+  else if ($maxdupr < 0) {
+    form_set_error('traffic_pop_max_duration', t('Popup duration must be positive.'));
+  }
+  
+  if (!is_numeric($waittime)) {
+    form_set_error('traffic_pop_wait_time', t('You must enter an integer for the wait time'));
+  }
+  else if ($waittime < 0) {
+    form_set_error('traffic_pop_wait_time', t('Wait time must be positive.'));
+  }
+  
+}
+
+function traffic_pop_menu() {
+
+  $items = array();
+
+  $items['admin/settings/traffic_pop'] = array(
+    'title' => 'Traffic Pop Settings',
+    'description' => 'Setting forTraffic Pop Module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('traffic_pop_admin_settings'),
+    'access arguments' => array('administer traffic_pop settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+
+  return $items;
+}
